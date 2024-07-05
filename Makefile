@@ -2,7 +2,7 @@
 test:
 	poetry install
 
-# PROJECT="another-project" make rename
+# PROJECT="langchain-llamacpp-chat-model" make rename
 .PHONY: rename
 rename:
 	@if [ -z "$(PROJECT)" ]; then \
