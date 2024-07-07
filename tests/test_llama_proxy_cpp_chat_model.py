@@ -3,7 +3,9 @@ from unittest.mock import MagicMock
 
 from llama_cpp import Llama
 import pytest
-from langchain_llamacpp_chat_model.llama_cpp_chat_model import LlamaCppChatModel
+from langchain_llamacpp_chat_model.llama_proxy_chat_model import (
+    LlamaProxyChatModel,
+)
 from llama_cpp.server.app import LlamaProxy
 from langchain_core.messages import HumanMessage
 
@@ -28,12 +30,12 @@ def llama_proxy_mock(llama_mock):
 
 @pytest.fixture
 def instance(llama_proxy_mock, model_name):
-    return LlamaCppChatModel(llama_proxy=llama_proxy_mock, model_name=model_name)
+    return LlamaProxyChatModel(llama_proxy=llama_proxy_mock, model_name=model_name)
 
 
-class TestLlamaCppChatModelGenerate:
+class TestLlamaProxyChatModelGenerate:
 
-    def test_generate_content(self, instance: LlamaCppChatModel, llama_mock):
+    def test_generate_content(self, instance: LlamaProxyChatModel, llama_mock):
         messages = [HumanMessage(content="Hello, how are you?")]
         expected_response = {
             "id": "test-id",
@@ -52,7 +54,7 @@ class TestLlamaCppChatModelGenerate:
 
         assert result.generations[0].message.content == "I'm doing well, thank you!"
 
-    def test_generate_usage(self, instance: LlamaCppChatModel, llama_mock):
+    def test_generate_usage(self, instance: LlamaProxyChatModel, llama_mock):
         messages = [HumanMessage(content="Hello, how are you?")]
         expected_response = {
             "id": "test-id",
@@ -74,7 +76,7 @@ class TestLlamaCppChatModelGenerate:
         assert result.generations[0].message.usage_metadata["output_tokens"] == 5
         assert result.generations[0].message.usage_metadata["total_tokens"] == 15
 
-    def test_generate_metadata(self, instance: LlamaCppChatModel, llama_mock):
+    def test_generate_metadata(self, instance: LlamaProxyChatModel, llama_mock):
         messages = [HumanMessage(content="Hello, how are you?")]
         expected_response = {
             "id": "test-id",
@@ -98,7 +100,7 @@ class TestLlamaCppChatModelGenerate:
 
 class TestLlamaCppChatModelStream:
 
-    def test_stream(self, instance: LlamaCppChatModel, llama_mock):
+    def test_stream(self, instance: LlamaProxyChatModel, llama_mock):
         messages = [HumanMessage(content="Hello, how are you?")]
         expected_response = [
             {
