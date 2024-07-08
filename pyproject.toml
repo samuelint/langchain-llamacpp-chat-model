@@ -9,14 +9,18 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
 llama-cpp-python = "^0.2.81"
-langchain = "^0.2.6"
-anyio = "^4.4.0"
-fastapi = "^0.111.0"
-sse-starlette = "^2.1.2"
-starlette-context = "^0.3.6"
-pydantic-settings = "^2.3.4"
-langchain-community = "^0.2.6"
 langchain-openai = "^0.1.14"
+
+langchain = { version = "^0.2.6", optional = true }
+anyio = { version = "^4.4.0", optional = true }
+fastapi = { version = "^0.111.0", optional = true }
+sse-starlette = { version = "^2.1.2", optional = true }
+starlette-context = { version = "^0.3.6", optional = true }
+pydantic-settings = { version = "^2.3.4", optional = true }
+
+[tool.poetry.extras]
+langchain = ["langchain"]
+langchain_serve = ["anyio", "fastapi", "sse-starlette", "starlette-context", "pydantic-settings"]
 
 [tool.poetry.group.test.dependencies]
 huggingface-hub = "^0.23.4"
