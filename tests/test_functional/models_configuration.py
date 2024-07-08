@@ -16,6 +16,10 @@ models_to_test = [
     },
 ]
 
+n_gpu_layers = (
+    0  # -1 to offload on GPU. Until GPU is supported on Github, must be run on CPU
+)
+
 
 def _model_local_path(model) -> str:
     return os.path.join(
@@ -30,7 +34,11 @@ def _create_models_settings():
     for model in models_to_test:
         local_path = _model_local_path(model)
         models.append(
-            ModelSettings(model=local_path, model_alias=model["alias"], n_gpu_layers=-1)
+            ModelSettings(
+                model=local_path,
+                model_alias=model["alias"],
+                n_gpu_layers=n_gpu_layers,
+            )
         )
 
     return models
@@ -41,7 +49,7 @@ def create_llama(request) -> Llama:
 
     return Llama(
         model_path=local_path,
-        n_gpu_layers=-1,
+        n_gpu_layers=n_gpu_layers,
     )
 
 
