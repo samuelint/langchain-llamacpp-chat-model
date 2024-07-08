@@ -35,7 +35,9 @@ class LlamaCreateContextManager:
     def __enter__(self):
         return self()
 
-    def __exit__(self):
+    def __exit__(self, exception_type, exception_value, exception_traceback):
+        if hasattr(self.response, "close"):
+            self.response.close()
         return False
 
 

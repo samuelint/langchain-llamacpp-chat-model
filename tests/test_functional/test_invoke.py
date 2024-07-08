@@ -2,7 +2,7 @@ from llama_cpp import Llama
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
-from langchain_llamacpp_chat_model.llama_chat_model import LlamaChatModel
+from langchain_llamacpp_chat_model import LlamaChatModel
 
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import tool
