@@ -53,6 +53,8 @@ class TestInvoke:
         result = structured_llm.invoke("Tell me a joke about cats")
 
         assert isinstance(result, Joke)
+        assert len(result.setup) > 0
+        assert len(result.punchline) > 0
 
     def test_force_function_calling(self, instance: LlamaChatModel):
         @tool

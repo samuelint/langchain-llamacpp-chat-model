@@ -2,7 +2,6 @@ from llama_cpp import Llama
 
 
 class LlamaCreateContextManager:
-
     def __init__(self, llama: Llama, **kwargs):
         self.llama = llama
         self.kwargs = kwargs

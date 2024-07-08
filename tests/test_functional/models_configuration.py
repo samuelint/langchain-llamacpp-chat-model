@@ -38,6 +38,7 @@ def _create_models_settings():
                 model=local_path,
                 model_alias=model["alias"],
                 n_gpu_layers=n_gpu_layers,
+                chat_format="chatml-function-calling",
             )
         )
 
@@ -50,6 +51,7 @@ def create_llama(request) -> Llama:
     return Llama(
         model_path=local_path,
         n_gpu_layers=n_gpu_layers,
+        chat_format="chatml-function-calling",
     )
 
 
