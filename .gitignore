@@ -11,3 +11,6 @@ __pycache__/
 *.pyi
 *.pyw
 *.pytest_cache
+
+*.tar.gz
+*.whl
