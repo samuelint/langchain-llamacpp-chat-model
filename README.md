@@ -95,7 +95,7 @@ print(result.punchline)  # Because it wanted to keep an eye on the mouse!
 
 ```
 
-#### Funtion calling
+#### Function calling
 
 ```python
 @tool
