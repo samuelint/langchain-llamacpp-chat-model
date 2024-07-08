@@ -67,3 +67,22 @@ class TestInvoke:
         result = llm_with_tool.invoke("What is the magic mumber of 2?")
 
         assert result.tool_calls[0]["name"] == "magic_number_tool"
+
+
+class TestAInvoke:
+
+    @pytest.fixture(
+        params=models_to_test, ids=[config["repo_id"] for config in models_to_test]
+    )
+    def llama(self, request) -> Llama:
+        return create_llama(request)
+
+    @pytest.fixture
+    def instance(self, llama):
+        return LlamaChatModel(llama=llama)
+
+    @pytest.mark.asyncio
+    async def test_ainvoke(self, instance: LlamaChatModel):
+        result = await instance.ainvoke("Say Hi!")
+
+        assert len(result.content) > 0
