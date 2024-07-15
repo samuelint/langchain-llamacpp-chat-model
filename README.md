@@ -22,10 +22,20 @@ If you find this project useful, please give it a star ⭐!
 pip install langchain-llamacpp-chat-model
 ```
 
+```bash
+# When using llama_proxy
+pip install langchain-llamacpp-chat-model langchain-llamacpp-chat-model[llama_proxy]
+```
+
 ##### poetry
 
 ```bash
 poetry add langchain-llamacpp-chat-model
+```
+
+```bash
+# When using llama_proxy
+poetry add langchain-llamacpp-chat-model langchain-llamacpp-chat-model[llama_proxy]
 ```
 
 ## Usage

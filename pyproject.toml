@@ -16,11 +16,11 @@ anyio = { version = "^4.4.0", optional = true }
 fastapi = { version = "^0.111.0", optional = true }
 sse-starlette = { version = "^2.1.2", optional = true }
 starlette-context = { version = "^0.3.6", optional = true }
-pydantic-settings = { version = "^2.3.4", optional = true }
+pydantic-settings = { version = "^2.3.4", optional = false }
 
 [tool.poetry.extras]
 langchain = ["langchain"]
-langchain_serve = ["anyio", "fastapi", "sse-starlette", "starlette-context", "pydantic-settings"]
+llama_proxy = ["anyio", "fastapi", "sse-starlette", "starlette-context"]
 
 [tool.poetry.group.test.dependencies]
 huggingface-hub = "^0.23.4"
