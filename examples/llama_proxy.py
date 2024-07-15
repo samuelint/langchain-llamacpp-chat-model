@@ -1,6 +1,6 @@
 import os
 from llama_cpp.server.app import LlamaProxy, ModelSettings
-from langchain_llamacpp_chat_model import LlamaProxyChatModel
+from langchain_llamacpp_chat_model.proxy import LlamaProxyChatModel
 
 llama3_model_path = os.path.join(
     os.path.expanduser("~/.cache/lm-studio/models"),

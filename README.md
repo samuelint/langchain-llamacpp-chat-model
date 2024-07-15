@@ -103,6 +103,7 @@ assert isinstance(result, Joke)
 print(result.setup)  # Why was the cat sitting on the computer?
 print(result.punchline)  # Because it wanted to keep an eye on the mouse!
 ```
+
 ⚠️ Ensure temperature is set to 0 (or near 0). The open-source models (tested with Phi3 and LLama3) do not perform well when calling functions, as their behavior can be unpredictable.
 
 #### Function calling
@@ -122,6 +123,7 @@ result = llm_with_tool.invoke("What is the magic mumber of 2?")
 
 assert result.tool_calls[0]["name"] == "magic_number_tool"
 ```
+
 ⚠️ Ensure temperature is set to 0 (or near 0). The open-source models (tested with Phi3 and LLama3) do not perform well when calling functions, as their behavior can be unpredictable.
 
 ### Using LlamaProxy
@@ -131,7 +133,7 @@ LLamaProxy allow to define multiple models and use one of them by specifying `mo
 ```python
 import os
 from llama_cpp.server.app import LlamaProxy, ModelSettings
-from langchain_llamacpp_chat_model import LlamaProxyChatModel
+from langchain_llamacpp_chat_model.proxy import LlamaProxyChatModel
 
 llama3_model_path = os.path.join(
     os.path.expanduser("~/.cache/lm-studio/models"),
