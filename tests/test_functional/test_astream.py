@@ -16,7 +16,7 @@ class TestAStream:
 
     @pytest.fixture
     def instance(self, llama):
-        return LlamaChatModel(llama=llama)
+        return LlamaChatModel(llama=llama, temperature=0)
 
     @pytest.mark.asyncio
     async def test_astream(self, instance: LlamaChatModel):
@@ -44,4 +44,4 @@ class TestAStream:
             final_content += token.content
 
         assert len(final_content) > 0
-        assert "banana" in final_content
+        assert "banana" in final_content.lower()

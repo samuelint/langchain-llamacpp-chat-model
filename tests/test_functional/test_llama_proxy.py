@@ -22,7 +22,9 @@ class TestLlamaProxyChat:
     )
     def instance(self, llama_proxy: LlamaProxy, request):
         return LlamaProxyChatModel(
-            llama_proxy=llama_proxy, model_name=request.param["alias"]
+            llama_proxy=llama_proxy,
+            model_name=request.param["alias"],
+            temperature=0,
         )
 
     def test_conversation_memory(self, instance: LlamaProxyChatModel):
@@ -34,4 +36,4 @@ class TestLlamaProxyChat:
             ]
         )
 
-        assert "banana" in result.content
+        assert "banana" in result.content.lower()

@@ -23,7 +23,7 @@ class TestAInvoke:
 
     @pytest.fixture
     def instance(self, llama):
-        return LlamaChatModel(llama=llama)
+        return LlamaChatModel(llama=llama, temperature=0)
 
     @pytest.mark.asyncio
     async def test_ainvoke(self, instance: LlamaChatModel):
@@ -41,4 +41,4 @@ class TestAInvoke:
             ]
         )
 
-        assert "banana" in result.content
+        assert "banana" in result.content.lower()

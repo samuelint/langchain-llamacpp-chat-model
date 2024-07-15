@@ -24,7 +24,7 @@ class TestInvoke:
 
     @pytest.fixture
     def instance(self, llama):
-        return LlamaChatModel(llama=llama)
+        return LlamaChatModel(llama=llama, temperature=0)
 
     def test_invoke(self, instance: LlamaChatModel):
         result = instance.invoke("Say Hi!")
@@ -45,7 +45,7 @@ class TestInvoke:
             ]
         )
 
-        assert "banana" in result.content
+        assert "banana" in result.content.lower()
 
     def test_json_mode(self, instance: LlamaChatModel):
         structured_llm = instance.with_structured_output(Joke)
