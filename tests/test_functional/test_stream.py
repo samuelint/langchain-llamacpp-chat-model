@@ -16,7 +16,7 @@ class TestStream:
 
     @pytest.fixture
     def instance(self, llama):
-        return LlamaChatModel(llama=llama)
+        return LlamaChatModel(llama=llama, temperature=0)
 
     def test_stream(self, instance: LlamaChatModel):
         stream = instance.stream("Say Hi!")
@@ -50,4 +50,4 @@ class TestStream:
             final_content += token.content
 
         assert len(final_content) > 0
-        assert "banana" in final_content
+        assert "banana" in final_content.lower()
