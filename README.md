@@ -102,8 +102,8 @@ result = structured_llm.invoke("Tell me a joke about cats")
 assert isinstance(result, Joke)
 print(result.setup)  # Why was the cat sitting on the computer?
 print(result.punchline)  # Because it wanted to keep an eye on the mouse!
-
 ```
+⚠️ Ensure temperature is set to 0 (or near 0). The open-source models (tested with Phi3 and LLama3) do not perform well when calling functions, as their behavior can be unpredictable.
 
 #### Function calling
 
@@ -121,8 +121,8 @@ llm_with_tool = chat_model.bind_tools(
 result = llm_with_tool.invoke("What is the magic mumber of 2?")
 
 assert result.tool_calls[0]["name"] == "magic_number_tool"
-
 ```
+⚠️ Ensure temperature is set to 0 (or near 0). The open-source models (tested with Phi3 and LLama3) do not perform well when calling functions, as their behavior can be unpredictable.
 
 ### Using LlamaProxy
 
@@ -168,5 +168,4 @@ for token in stream:
     final_content += token.content
 
 print(final_content)
-
 ```
