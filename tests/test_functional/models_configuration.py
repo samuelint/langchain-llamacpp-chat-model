@@ -45,8 +45,8 @@ def _create_models_settings():
     return models
 
 
-def create_llama(request) -> Llama:
-    local_path = _model_local_path(request.param)
+def create_llama(params) -> Llama:
+    local_path = _model_local_path(params)
 
     return Llama(
         model_path=local_path,
