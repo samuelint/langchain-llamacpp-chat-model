@@ -12,7 +12,7 @@ class TestStream:
         params=models_to_test, ids=[config["repo_id"] for config in models_to_test]
     )
     def llama(self, request) -> Llama:
-        return create_llama(request)
+        return create_llama(request.param)
 
     @pytest.fixture
     def instance(self, llama):

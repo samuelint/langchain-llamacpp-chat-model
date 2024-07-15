@@ -8,6 +8,7 @@ from .llama_client_async_proxy import LLamaOpenAIClientAsyncProxy
 
 class LlamaChatModel(BaseChatOpenAI):
     model_name: str = "unknown"
+    llama: Llama = None
 
     def __init__(
         self,
@@ -19,3 +20,9 @@ class LlamaChatModel(BaseChatOpenAI):
             client=LLamaOpenAIClientProxy(llama=llama),
             async_client=LLamaOpenAIClientAsyncProxy(llama=llama),
         )
+        self.llama = llama
+
+    @property
+    def _llm_type(self) -> str:
+        """Return type of chat model."""
+        return self.llama.model_path
