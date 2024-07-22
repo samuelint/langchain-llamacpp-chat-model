@@ -2,7 +2,7 @@ from llama_cpp import Llama
 import pytest
 
 from langchain_llamacpp_chat_model import LlamaChatModel
-
+from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import tool
 from tests.test_functional.models_configuration import create_llama, models_to_test
@@ -45,5 +45,24 @@ class TestFunctionCalling:
         )
 
         result = llm_with_tool.invoke("What is the magic mumber of 2?")
+
+        assert result.tool_calls[0]["name"] == "magic_number_tool"
+
+    def test_auto_function_calling(self, instance: LlamaChatModel):
+        @tool
+        def magic_number_tool(input: int) -> int:
+            """Applies a magic function to an input."""
+            return input + 2
+
+        llm_with_tool = instance.bind_tools([magic_number_tool], tool_choice="auto")
+
+        result = llm_with_tool.invoke(
+            [
+                SystemMessage(
+                    content="The assistant calls functions with appropriate input when necessary."
+                ),
+                HumanMessage(content="What is the magic mumber of 2?"),
+            ]
+        )
 
         assert result.tool_calls[0]["name"] == "magic_number_tool"

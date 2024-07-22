@@ -14,11 +14,6 @@ models_to_test = [
         "filename": "Phi-3-mini-4k-instruct-q4.gguf",
         "alias": "phi3",
     },
-    {
-        "repo_id": "TheBloke/Mistral-7B-Instruct-v0.2-GGUF",
-        "filename": "mistral-7b-instruct-v0.2.Q4_K_S.gguf",
-        "alias": "Mistral-7B",
-    },
 ]
 
 n_gpu_layers = (
@@ -55,6 +50,7 @@ def create_llama(params) -> Llama:
     return Llama(
         model_path=local_path,
         n_gpu_layers=n_gpu_layers,
+        chat_format="chatml-function-calling",
     )
 
 
