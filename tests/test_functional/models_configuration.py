@@ -14,10 +14,15 @@ models_to_test = [
         "filename": "Phi-3-mini-4k-instruct-q4.gguf",
         "alias": "phi3",
     },
+    {
+        "repo_id": "TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
+        "filename": "mistral-7b-instruct-v0.1.Q4_K_S.gguf",
+        "alias": "Mistral-7B",
+    },
 ]
 
 n_gpu_layers = (
-    0  # -1 to offload on GPU. Until GPU is supported on Github, must be run on CPU
+    -1  # -1 to offload on GPU. Until GPU is supported on Github, must be run on CPU
 )
 
 
