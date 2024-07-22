@@ -15,8 +15,8 @@ models_to_test = [
         "alias": "phi3",
     },
     {
-        "repo_id": "TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
-        "filename": "mistral-7b-instruct-v0.1.Q4_K_S.gguf",
+        "repo_id": "TheBloke/Mistral-7B-Instruct-v0.2-GGUF",
+        "filename": "mistral-7b-instruct-v0.2.Q4_K_S.gguf",
         "alias": "Mistral-7B",
     },
 ]
@@ -43,7 +43,6 @@ def _create_models_settings():
                 model=local_path,
                 model_alias=model["alias"],
                 n_gpu_layers=n_gpu_layers,
-                chat_format="chatml-function-calling",
             )
         )
 
@@ -56,7 +55,6 @@ def create_llama(params) -> Llama:
     return Llama(
         model_path=local_path,
         n_gpu_layers=n_gpu_layers,
-        chat_format="chatml-function-calling",
     )
 
 

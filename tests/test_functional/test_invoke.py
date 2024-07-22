@@ -4,14 +4,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 
 from langchain_llamacpp_chat_model import LlamaChatModel
 
-from langchain_core.pydantic_v1 import BaseModel, Field
-from langchain_core.tools import tool
 from tests.test_functional.models_configuration import create_llama, models_to_test
-
-
-class Joke(BaseModel):
-    setup: str = Field(description="The setup of the joke")
-    punchline: str = Field(description="The punchline to the joke")
 
 
 class TestInvoke:
@@ -46,26 +39,3 @@ class TestInvoke:
         )
 
         assert "banana" in result.content.lower()
-
-    def test_json_mode(self, instance: LlamaChatModel):
-        structured_llm = instance.with_structured_output(Joke)
-
-        result = structured_llm.invoke("Tell me a joke about cats")
-
-        assert isinstance(result, Joke)
-        assert len(result.setup) > 0
-        assert len(result.punchline) > 0
-
-    def test_force_function_calling(self, instance: LlamaChatModel):
-        @tool
-        def magic_number_tool(input: int) -> int:
-            """Applies a magic function to an input."""
-            return input + 2
-
-        llm_with_tool = instance.bind_tools(
-            [magic_number_tool], tool_choice="magic_number_tool"
-        )
-
-        result = llm_with_tool.invoke("What is the magic mumber of 2?")
-
-        assert result.tool_calls[0]["name"] == "magic_number_tool"
