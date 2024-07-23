@@ -89,7 +89,11 @@ class TestFunctionCallingWithStream:
             [magic_number_tool], tool_choice="magic_number_tool"
         )
 
-        stream = llm_with_tool.stream("What is the magic mumber of 2?")
+        stream = llm_with_tool.stream(
+            [
+                HumanMessage(content="What is the magic mumber of 2?"),
+            ]
+        )
 
         tool_call_chunks = []
         for chunk in stream:
@@ -99,6 +103,12 @@ class TestFunctionCallingWithStream:
         assert len(tool_call_chunks) > 0
         assert tool_call_chunks[0]["name"] == "magic_number_tool"
 
+    @pytest.mark.skip(
+        reason="""\
+        Stream + auto tool choice not supported yet. \
+        https://github.com/abetlen/llama-cpp-python/discussions/1615\
+        """
+    )
     def test_auto_function_calling(self, instance: LlamaChatModel):
         @tool
         def magic_number_tool(input: int) -> int:
@@ -109,9 +119,6 @@ class TestFunctionCallingWithStream:
 
         stream = llm_with_tool.stream(
             [
-                SystemMessage(
-                    content="The assistant calls functions with appropriate input when necessary."
-                ),
                 HumanMessage(content="What is the magic mumber of 2?"),
             ]
         )
