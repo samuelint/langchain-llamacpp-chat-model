@@ -1,3 +1,4 @@
+import multiprocessing
 import os
 from llama_cpp import Llama
 from llama_cpp.server.app import LlamaProxy
@@ -50,6 +51,8 @@ def create_llama(params) -> Llama:
     return Llama(
         model_path=local_path,
         n_gpu_layers=n_gpu_layers,
+        offload_kqv=True,  # Equivalent of f16_kv=True
+        n_threads=multiprocessing.cpu_count() - 1,
         chat_format="chatml-function-calling",
     )
 
